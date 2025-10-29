@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alzheimer Stage Detection</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 50px; }
+    #result { font-size: 24px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Upload Brain Scan</h1>
+  <input type="file" id="imageInput" accept="image/*"><br><br>
+  <button onclick="getResult()">Get Result</button>
+  <div id="result"></div>
+
+  <script>
+    async function getResult() {
+      const input = document.getElementById('imageInput');
+      if (!input.files[0]) {
+        alert("Please select an image first.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("image", input.files[0]);
+
+      try {
+        const response = await fetch("https://alzheimers-detection-6kb9.onrender.com/predict", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+        document.getElementById("result").innerText = `Predicted Stage: ${data.label}`;
+      } catch (error) {
+        document.getElementById("result").innerText = "Error: Unable to get result.";
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>
