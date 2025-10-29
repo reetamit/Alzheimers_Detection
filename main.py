@@ -4,8 +4,17 @@ import torch
 import torch.nn as nn
 from torchvision import models, transforms
 import io
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or restrict to your GitHub Pages domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
