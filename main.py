@@ -47,7 +47,9 @@ def save_activation(module, input, output):
 
 target_layer = model.features[6][1]
 target_layer.register_forward_hook(save_activation)
-target_layer.register_backward_hook(save_gradient)
+#target_layer.register_backward_hook(save_gradient)
+target_layer.register_full_backward_hook(save_gradient)
+
 
 
 # End points
