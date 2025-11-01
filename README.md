@@ -57,19 +57,19 @@ The model is trained on publicly available **Kaggle Alzheimer’s MRI datasets**
 ### 🔹 Grad-CAM Overlays
 - Highlights spatial attention per class  
 - Distinct activation patterns across stages  
-![Grad-CAM Visualization](path/to/gradcam_image.png)
+![Grad-CAM Visualization](./data/grad.png)
 
 ### 🔹 Confidence Scores
 - Per-sample prediction certainty across 4 classes  
-![Confidence Score Chart](path/to/confidence_chart.png)
+![Confidence Score Chart](./data/cs.png)
 
 ### 🔹 Prediction Uncertainty
 - Entropy-based visualization for 10 samples  
-![Entropy Plot](path/to/entropy_plot.png)
+![Entropy Plot](./data/pu.png)
 
 ### 🔹 Confusion Matrix
 - True vs predicted label distribution  
-![Confusion Matrix](path/to/confusion_matrix.png)
+![Confusion Matrix](./data/cm.png)
 
 ---
 
