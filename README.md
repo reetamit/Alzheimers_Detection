@@ -75,7 +75,7 @@ The model is trained on publicly available **Kaggle Alzheimer’s MRI datasets**
 
 ## 🌍 Impact
 
-This project demonstrates an original contribution of major significance in medical AI. It blends technical rigor with ethical design, offering a reproducible, interpretable tool for Alzheimer’s detection.
+This project blends technical rigor with ethical design, offering a reproducible, interpretable tool for Alzheimer’s detection.
 
 ---
 
@@ -88,9 +88,3 @@ cd alzheimer-mri-classification
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Train the model
-python train.py
-
-# Evaluate and visualize
-python evaluate.py
