@@ -52,7 +52,7 @@ The model is trained on publicly available **Kaggle Alzheimer’s MRI datasets**
 ### 🔹 SHAP (SHapley Additive Explanations)
 - Voxel-level feature attribution  
 - Reveals regions influencing model predictions  
-![SHAP Visualization](path/to/shap_image.png)
+![SHAP Visualization](./data/shap_fig.png)
 
 ### 🔹 Grad-CAM Overlays
 - Highlights spatial attention per class  
