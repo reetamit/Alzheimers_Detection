@@ -75,11 +75,7 @@ The model is trained on publicly available **Kaggle Alzheimer’s MRI datasets**
 
 ## 🌍 Impact
 
-This project demonstrates an original contribution of major significance in medical AI. It blends technical rigor with ethical design, offering a reproducible, interpretable tool for Alzheimer’s detection. The pipeline is optimized for clinical deployment and aligns with EB-1A criteria through:
-
-- Leadership in model transparency  
-- Public benefit via early diagnosis  
-- Open-source dissemination and reproducibility  
+This project demonstrates an original contribution of major significance in medical AI. It blends technical rigor with ethical design, offering a reproducible, interpretable tool for Alzheimer’s detection.
 
 ---
 
