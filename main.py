@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import base64
 
+#Run FastAPI app localy with: uvicorn main:app --reload
 
 app = FastAPI()
 
@@ -83,15 +84,17 @@ async def explain(image: UploadFile = File(...)):
     output[0, pred_class].backward()
 
     # Get gradients and activations
-    grad = gradients[0].cpu().numpy()[0]
-    act = activations[0].cpu().numpy()[0]
+    grad = gradients[0].detach().cpu().numpy()[0]
+    act = activations[0].detach().cpu().numpy()[0]
+
 
     # Compute Grad-CAM
     weights = np.mean(grad, axis=(1, 2))
     cam = np.zeros(act.shape[1:], dtype=np.float32)
     for i, w in enumerate(weights):
         cam += w * act[i]
-    cam = np.maximum(cam, 0)
+    
+    """cam = np.maximum(cam, 0)
     cam = cam / cam.max()
 
     # Resize CAM to original image size
@@ -100,16 +103,42 @@ async def explain(image: UploadFile = File(...)):
 
     # Overlay CAM on original image
     original = np.array(pil_image)
-    overlay = np.uint8(0.5 * original + 0.5 * cam_img)
+    overlay = np.uint8(0.5 * original + 0.5 * cam_img)"""
+    import cv2
+
+    # Normalize CAM
+    cam = np.maximum(cam, 0)
+    cam = cam / cam.max()
+
+    # Resize CAM to original image size
+    cam_resized = cv2.resize(cam, pil_image.size, interpolation=cv2.INTER_LINEAR)
+
+    # Convert to 8-bit and apply colormap
+    heatmap = np.uint8(255 * cam_resized)
+    heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
+
+    # Convert grayscale image to 3-channel
+    original_np = np.array(pil_image)
+    original_rgb = cv2.cvtColor(original_np, cv2.COLOR_GRAY2BGR)
+
+    # Overlay heatmap on original image
+    overlay = cv2.addWeighted(original_rgb, 0.5, heatmap, 0.5, 0)
+    
 
     # Convert to base64
     fig, ax = plt.subplots()
-    ax.imshow(overlay, cmap='gray')
+    ax.imshow(original_rgb, cmap='gray')
+    ax.imshow(cam, cmap='jet', alpha=0.5)  # Overlay with color
     ax.axis('off')
-    buf = io.BytesIO()
+
+    """buf = io.BytesIO()
     plt.savefig(buf, format='png', bbox_inches='tight', pad_inches=0)
     buf.seek(0)
-    encoded = base64.b64encode(buf.read()).decode('utf-8')
+    encoded = base64.b64encode(buf.read()).decode('utf-8')"""
+    # Convert overlay to base64
+    _, buffer = cv2.imencode('.png', overlay)
+    encoded = base64.b64encode(buffer).decode('utf-8')
+
     plt.close()
 
     return {
