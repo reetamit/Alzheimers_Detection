@@ -81,10 +81,14 @@ This project blends technical rigor with ethical design, offering a reproducible
 
 ## 🚀 How to Run
 
-```bash
-# Clone the repo
-git clone https://github.com/your-username/alzheimer-mri-classification.git
-cd alzheimer-mri-classification
+    ```bash
+    # Clone the repo
+    git clone https://github.com/your-username/alzheimer-mri-classification.git
+    cd alzheimer-mri-classification
 
-# Install dependencies
-pip install -r requirements.txt
+    # Install dependencies
+    pip install -r requirements.txt
+
+## License
+    This project is licensed under
+    GNU General Public License version 3 or later (GPL3+)
